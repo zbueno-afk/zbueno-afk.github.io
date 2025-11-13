@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Assignment 2 - Income Tax Calculator</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/5/w3.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata">
+  <style>
+    body {
+      font-family: "Inconsolata", sans-serif;
+      margin: 0;
+      background-image: url('https://i.pinimg.com/1200x/cc/4f/94/cc4f941c57d3077ba9a79550a9bf1405.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      color: white;
+      text-align: center;
+      padding-top: 100px;
+    }
+
+    .w3-top {
+      background-color: rgba(245, 236, 218, 0.95) !important;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+
+    .navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 15px;
+    }
+
+    .navbar-center {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-grow: 1;
+    }
+
+    .w3-button {
+      background-color: transparent !important;
+      color: black !important;
+      border: none;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+
+    .box {
+      background-color: rgba(245, 236, 218, 0.8);
+      color: black;
+      max-width: 500px;
+      margin: 50px auto;
+      padding: 30px 25px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    }
+
+    input, button {
+      padding: 10px;
+      margin: 5px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-family: inherit;
+      width: 80%;
+    }
+
+    button {
+      background-color: #6A5D43;
+      color: white;
+      cursor: pointer;
+      width: 50%;
+    }
+
+    button:hover {
+      background-color: #5a4d36;
+    }
+
+    #result {
+      margin-top: 20px;
+      font-weight: bold;
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+  <div class="w3-top w3-padding">
+    <div class="navbar">
+      <a href="index.html" class="w3-button">Home</a>
+      <div class="navbar-center">
+        <a href="assignment1.html" class="w3-button">Assignment 1</a>
+        <a href="assignment2.html" class="w3-button">Assignment 2</a>
+        <a href="assignment3.html" class="w3-button">Assignment 3</a>
+        <a href="assignment4.html" class="w3-button">Assignment 4</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="box">
+    <h1>Income Tax Calculator</h1>
+    <p>Compute your income tax based on your Net Taxable Income.</p>
+
+    <input type="number" id="income" placeholder="Enter Net Taxable Income (₱)">
+    <br>
+    <button onclick="computeTax()">Compute Tax</button>
+
+    <div id="result"></div>
+  </div>
+
+  <script>
+    function computeTax() {
+      const income = parseFloat(document.getElementById('income').value);
+      let tax = 0;
+
+      if (isNaN(income) || income < 0) {
+        document.getElementById('result').innerText = "⚠️ Please enter a valid income.";
+        return;
+      }
+
+      if (income <= 250000) tax = 0;
+      else if (income <= 400000) tax = (income - 250000) * 0.20;
+      else if (income <= 800000) tax = 30000 + (income - 400000) * 0.25;
+      else if (income <= 2000000) tax = 130000 + (income - 800000) * 0.30;
+      else if (income <= 8000000) tax = 490000 + (income - 2000000) * 0.32;
+      else tax = 2410000 + (income - 8000000) * 0.35;
+
+      document.getElementById('result').innerHTML = `
+        <p>Net Taxable Income: <strong>₱${income.toLocaleString(undefined, {minimumFractionDigits: 2})}</strong></p>
+        <p>Computed Income Tax: <strong>₱${tax.toLocaleString(undefined, {minimumFractionDigits: 2})}</strong></p>
+      `;
+    }
+  </script>
+</body>
+</html>
