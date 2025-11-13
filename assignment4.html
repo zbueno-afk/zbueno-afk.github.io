@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Assignment 4 - Payroll List System</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/5/w3.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata">
+  <style>
+    body {
+      font-family: "Inconsolata", sans-serif;
+      margin: 0;
+      background-image: url('https://i.pinimg.com/1200x/cc/4f/94/cc4f941c57d3077ba9a79550a9bf1405.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      color: white;
+      text-align: center;
+      padding-top: 100px;
+    }
+
+    .w3-top {
+      background-color: rgba(245, 236, 218, 0.95) !important;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+
+    .navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 15px;
+    }
+
+    .navbar-center {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-grow: 1;
+    }
+
+    .w3-button {
+      background-color: transparent !important;
+      color: black !important;
+      border: none;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+
+    .box {
+      background-color: rgba(245, 236, 218, 0.8);
+      color: black;
+      max-width: 800px;
+      margin: 50px auto;
+      padding: 30px 25px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    }
+
+    input, button {
+      padding: 10px;
+      margin: 5px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-family: inherit;
+    }
+
+    button {
+      background-color: #6A5D43;
+      color: white;
+      cursor: pointer;
+      width: 120px;
+    }
+
+    button:hover {
+      background-color: #5a4d36;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    th, td {
+      padding: 8px;
+      border: 1px solid black;
+    }
+
+    th {
+      background-color: #d8c9a6;
+    }
+
+    tr:nth-child(even) {
+      background-color: rgba(255, 255, 255, 0.5);
+    }
+
+    tr:nth-child(odd) {
+      background-color: rgba(240, 230, 200, 0.5);
+    }
+
+    #deleteBox {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="w3-top w3-padding">
+    <div class="navbar">
+      <a href="index.html" class="w3-button">Home</a>
+      <div class="navbar-center">
+        <a href="assignment1.html" class="w3-button">Assignment 1</a>
+        <a href="assignment2.html" class="w3-button">Assignment 2</a>
+        <a href="assignment3.html" class="w3-button">Assignment 3</a>
+        <a href="assignment4.html" class="w3-button">Assignment 4</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="box">
+    <h1>Assignment 4: Payroll List System</h1>
+    <p>Add and delete employees while automatically computing their pay.</p>
+
+    <div>
+      <input type="text" id="name" placeholder="Employee Name">
+      <input type="number" id="days" placeholder="Days Worked">
+      <input type="number" id="rate" placeholder="Daily Rate">
+      <input type="number" id="deduct" placeholder="Deduction Amount">
+      <br>
+      <button onclick="addEmployee()">Add Employee</button>
+    </div>
+
+    <div id="deleteBox">
+      <input type="number" id="deleteNo" placeholder="Enter Line No. to Delete">
+      <button onclick="deleteEmployee()">Delete</button>
+    </div>
+
+    <table id="payrollTable">
+      <thead>
+        <tr>
+          <th>No.</th>
+          <th>Employee Name</th>
+          <th>Days Worked</th>
+          <th>Daily Rate</th>
+          <th>Gross Pay</th>
+          <th>Deduction</th>
+          <th>Net Pay</th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+  </div>
+
+  <script>
+    let employees = [];
+
+    function addEmployee() {
+      const name = document.getElementById('name').value.trim();
+      const days = parseFloat(document.getElementById('days').value);
+      const rate = parseFloat(document.getElementById('rate').value);
+      const deduct = parseFloat(document.getElementById('deduct').value);
+
+      if (!name || isNaN(days) || isNaN(rate) || isNaN(deduct)) {
+        alert("Please fill out all fields correctly.");
+        return;
+      }
+
+      const gross = days * rate;
+      const net = gross - deduct;
+
+      employees.push({
+        name, days, rate, gross, deduct, net
+      });
+
+      clearInputs();
+      displayTable();
+    }
+
+    function clearInputs() {
+      document.getElementById('name').value = '';
+      document.getElementById('days').value = '';
+      document.getElementById('rate').value = '';
+      document.getElementById('deduct').value = '';
+    }
+
+    function displayTable() {
+      const tbody = document.querySelector("#payrollTable tbody");
+      tbody.innerHTML = "";
+      employees.forEach((emp, index) => {
+        const row = `
+          <tr>
+            <td>${index + 1}</td>
+            <td>${emp.name}</td>
+            <td>${emp.days}</td>
+            <td>₱${emp.rate.toFixed(2)}</td>
+            <td>₱${emp.gross.toFixed(2)}</td>
+            <td>₱${emp.deduct.toFixed(2)}</td>
+            <td>₱${emp.net.toFixed(2)}</td>
+          </tr>
+        `;
+        tbody.innerHTML += row;
+      });
+    }
+
+    function deleteEmployee() {
+      const lineNo = parseInt(document.getElementById('deleteNo').value);
+      if (isNaN(lineNo) || lineNo < 1 || lineNo > employees.length) {
+        alert("Please enter a valid line number.");
+        return;
+      }
+      employees.splice(lineNo - 1, 1);
+      document.getElementById('deleteNo').value = '';
+      displayTable();
+    }
+  </script>
+
+</body>
+</html>
