@@ -102,58 +102,56 @@
     <p>Calculate Sum, Factorial, or Average using loops.</p>
 
     <select id="operation">
-      <option value="sum">Sum of Numbers</option>
-      <option value="factorial">Factorial</option>
-      <option value="average">Average of Numbers</option>
-    </select>
-    <br>
-    <input type="text" id="numbers" placeholder="Enter numbers separated by commas">
-    <br>
-    <button onclick="computeLoop()">Compute</button>
+  <option value="sum">Sum of Numbers</option>
+  <option value="factorial">Factorial</option>
+  <option value="average">Average of Numbers</option>
+  <option value="product">Product of Numbers</option> 
+</select>
 
-    <div id="result"></div>
-  </div>
+<script>
+  function computeLoop() {
+    const op = document.getElementById('operation').value;
+    const numsStr = document.getElementById('numbers').value;
+    let result = '';
 
-  <script>
-    function computeLoop() {
-      const op = document.getElementById('operation').value;
-      const numsStr = document.getElementById('numbers').value;
-      let result = '';
-
-      if (!numsStr) {
-        document.getElementById('result').innerText = "⚠️ Please enter numbers.";
-        return;
-      }
-
-      let nums = numsStr.split(',').map(n => parseFloat(n.trim()));
-
-      if (nums.some(isNaN)) {
-        document.getElementById('result').innerText = "⚠️ All inputs must be valid numbers.";
-        return;
-      }
-
-      if (op === 'sum') {
-        let sum = 0;
-        for (let n of nums) sum += n;
-        result = `Sum = ${sum}`;
-      } else if (op === 'average') {
-        let sum = 0;
-        for (let n of nums) sum += n;
-        result = `Average = ${(sum / nums.length).toFixed(2)}`;
-      } else if (op === 'factorial') {
-        if (nums.length !== 1 || nums[0] < 0 || !Number.isInteger(nums[0])) {
-          document.getElementById('result').innerText = "⚠️ Enter a single non-negative integer for factorial.";
-          return;
-        }
-        let n = nums[0];
-        let factorial = 1;
-        for (let i = 1; i <= n; i++) factorial *= i;
-        result = `${n}! = ${factorial}`;
-      }
-
-      document.getElementById('result').innerText = result;
+    if (!numsStr.trim()) {
+      document.getElementById('result').innerText = "⚠️ Please enter numbers.";
+      return;
     }
-  </script>
+
+    let nums = numsStr.split(',').map(n => n.trim()).filter(n => n !== '').map(n => parseFloat(n));
+
+    if (nums.some(isNaN)) {
+      document.getElementById('result').innerText = "⚠️ All inputs must be valid numbers.";
+      return;
+    }
+
+    if (op === 'sum') {
+      let sum = 0;
+      for (let n of nums) sum += n;
+      result = `Sum = ${sum}`;
+    } else if (op === 'average') {
+      let sum = 0;
+      for (let n of nums) sum += n;
+      result = `Average = ${(sum / nums.length).toFixed(2)}`;
+    } else if (op === 'factorial') {
+      if (nums.length !== 1 || nums[0] < 0 || !Number.isInteger(nums[0])) {
+        document.getElementById('result').innerText = "⚠️ Enter a single non-negative integer for factorial.";
+        return;
+      }
+      let n = nums[0];
+      let factorial = 1;
+      for (let i = 1; i <= n; i++) factorial *= i;
+      result = `${n}! = ${factorial}`;
+    } else if (op === 'product') {  
+      let product = 1;
+      for (let n of nums) product *= n;
+      result = `Product = ${product}`;
+    }
+
+    document.getElementById('result').innerText = result;
+  }
+</script>
 
 </body>
 </html>
