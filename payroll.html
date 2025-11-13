@@ -5,120 +5,207 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://www.w3schools.com/w3css/5/w3.css">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,700&display=swap">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <style>
     body {
-      font-family: "Inconsolata", sans-serif;
+      font-family: 'Roboto', sans-serif;
       margin: 0;
-      background-image: url('https://i.pinimg.com/1200x/cc/4f/94/cc4f941c57d3077ba9a79550a9bf1405.jpg');
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
       background-attachment: fixed;
-      color: white;
+      color: #333;
       text-align: center;
-      padding-top: 100px;
+      padding-top: 120px;
+      min-height: 100vh;
     }
 
     .w3-top {
-      background-color: rgba(245, 236, 218, 0.95) !important;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      background: linear-gradient(90deg, rgba(255, 255, 255, 0.95), rgba(240, 240, 240, 0.95));
+      box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(0,0,0,0.1);
     }
 
     .navbar {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 15px;
+      padding: 15px 20px;
     }
 
     .navbar-center {
       display: flex;
-      gap: 10px;
+      gap: 15px;
       justify-content: center;
       flex-grow: 1;
     }
 
     .w3-button {
       background-color: transparent !important;
-      color: black !important;
+      color: #333 !important;
       border: none;
-      font-weight: bold;
+      font-weight: 600;
       text-transform: uppercase;
+      font-size: 14px;
+      padding: 10px 15px;
+      border-radius: 25px;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .w3-button:hover {
+      background-color: rgba(102, 126, 234, 0.1) !important;
+      color: #667eea !important;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
     }
 
     .box {
-      background-color: rgba(245, 236, 218, 0.8);
-      color: black;
-      max-width: 800px;
+      background: rgba(255, 255, 255, 0.95);
+      color: #333;
+      max-width: 900px;
       margin: 50px auto;
-      padding: 30px 25px;
-      border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      padding: 40px 30px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      backdrop-filter: blur(15px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      animation: fadeInUp 0.8s ease-out;
     }
 
-    input, button {
-      padding: 10px;
-      margin: 5px;
-      border-radius: 5px;
-      border: 1px solid #ccc;
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    h1 {
+      font-family: 'Roboto', sans-serif;
+      font-weight: 700;
+      font-size: 2.5em;
+      margin-bottom: 10px;
+      color: #667eea;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    p {
+      font-weight: 300;
+      font-size: 1.1em;
+      margin-bottom: 30px;
+      color: #666;
+    }
+
+    input {
+      padding: 12px 15px;
+      margin: 8px;
+      border-radius: 10px;
+      border: 2px solid #ddd;
       font-family: inherit;
+      font-size: 16px;
+      width: 200px;
+      transition: all 0.3s ease;
+      background: #f9f9f9;
+    }
+
+    input:focus {
+      border-color: #667eea;
+      box-shadow: 0 0 10px rgba(102, 126, 234, 0.3);
+      outline: none;
     }
 
     button {
-      background-color: #6A5D43;
+      background: linear-gradient(45deg, #667eea, #764ba2);
       color: white;
       cursor: pointer;
-      width: 120px;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 25px;
+      font-weight: 600;
+      font-size: 16px;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+      margin: 10px 5px;
     }
 
     button:hover {
-      background-color: #5a4d36;
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+      background: linear-gradient(45deg, #764ba2, #667eea);
     }
 
     table {
       width: 100%;
       border-collapse: collapse;
-      margin-top: 20px;
+      margin-top: 30px;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
     }
 
     th, td {
-      padding: 8px;
-      border: 1px solid black;
+      padding: 12px 15px;
+      text-align: center;
+      border-bottom: 1px solid #ddd;
     }
 
     th {
-      background-color: #d8c9a6;
+      background: linear-gradient(45deg, #667eea, #764ba2);
+      color: white;
+      font-weight: 600;
+      text-transform: uppercase;
+      font-size: 14px;
     }
 
     tr:nth-child(even) {
-      background-color: rgba(255, 255, 255, 0.5);
+      background-color: rgba(102, 126, 234, 0.05);
     }
 
     tr:nth-child(odd) {
-      background-color: rgba(240, 230, 200, 0.5);
+      background-color: rgba(255, 255, 255, 0.8);
+    }
+
+    tr:hover {
+      background-color: rgba(102, 126, 234, 0.1);
+      transform: scale(1.01);
+      transition: all 0.2s ease;
     }
 
     #deleteBox {
-      margin-top: 20px;
+      margin-top: 25px;
+      padding: 20px;
+      background: rgba(102, 126, 234, 0.05);
+      border-radius: 10px;
+      border-left: 5px solid #667eea;
+    }
+
+    .icon {
+      margin-right: 8px;
     }
   </style>
 </head>
 <body>
   <div class="w3-top w3-padding">
     <div class="navbar">
-      <a href="index.html" class="w3-button">Home</a>
+      <a href="index.html" class="w3-button"><i class="fas fa-home icon"></i>Home</a>
       <div class="navbar-center">
-        <a href="conversion.html" class="w3-button">Assignment 1</a>
-        <a href="incometax.html" class="w3-button">Assignment 2</a>
-        <a href="looping.html" class="w3-button">Assignment 3</a>
-        <a href="payroll.html" class="w3-button">Assignment 4</a>
+        <a href="conversion.html" class="w3-button"><i class="fas fa-exchange-alt icon"></i>Assignment 1</a>
+        <a href="incometax.html" class="w3-button"><i class="fas fa-calculator icon"></i>Assignment 2</a>
+        <a href="looping.html" class="w3-button"><i class="fas fa-sync-alt icon"></i>Assignment 3</a>
+        <a href="payroll.html" class="w3-button"><i class="fas fa-money-bill-wave icon"></i>Assignment 4</a>
       </div>
     </div>
   </div>
 
   <div class="box">
-    <h1>Payroll List System</h1>
+    <h1><i class="fas fa-users-cog"></i> Payroll List System</h1>
     <p>Add and delete employees while automatically computing their pay.</p>
 
     <div>
@@ -127,12 +214,12 @@
       <input type="number" id="rate" placeholder="Daily Rate">
       <input type="number" id="deduct" placeholder="Deduction Amount">
       <br>
-      <button onclick="addEmployee()">Add Employee</button>
+      <button onclick="addEmployee()"><i class="fas fa-plus"></i> Add Employee</button>
     </div>
 
     <div id="deleteBox">
       <input type="number" id="deleteNo" placeholder="Enter Line No. to Delete">
-      <button onclick="deleteEmployee()">Delete</button>
+      <button onclick="deleteEmployee()"><i class="fas fa-trash"></i> Delete</button>
     </div>
 
     <table id="payrollTable">
